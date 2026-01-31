@@ -5,37 +5,94 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="600">
+        Title="Database" Height="600" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="200"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        
-        <Button Grid.Column="0"
-                Height="100"
-                Content="Запуск"
-                Background="LightGreen"
-                Click="ButtonStart_Click"
-                x:Name="buttonStart"
-                Margin="5"/>
-        <Button Grid.Column="3"
-                Height="100"
-                Content="Очистка логов"
-                Background="Orange"
-                Click="ButtonClear_Click"
-                x:Name="buttonClear"
-                IsEnabled="True"
-                Margin="5"/>
-        <ListBox Grid.Row="1" 
-                 Grid.ColumnSpan="2"
-                 Grid.RowSpan="2"
-                 x:Name="listBox" Margin="0,0,40,20"/>
+
+        <StackPanel Grid.ColumnSpan="3" 
+                    Orientation="Horizontal" Margin="5">
+            <Button x:Name="buttonStart" 
+                    Content="Тест записи файлов (5 задач)" 
+                    Click="ButtonStart_Click" 
+                    Padding="10,5" Margin="5"/>
+            <Button x:Name="buttonClear" 
+                    Content="Очистка логов" 
+                    Click="ButtonClear_Click" 
+                    Padding="10,5" Margin="5"/>
+            <Button x:Name="buttonDbTest" 
+                    Content="Тест БД (4 подключения)" 
+                    Click="ButtonDbTest_Click" 
+                    Padding="10,5" Margin="5"/>
+            <Button x:Name="buttonConfig" 
+                    Content="Работа с конфигурацией" 
+                    Click="ButtonConfig_Click" 
+                    Padding="10,5" Margin="5"/>
+        </StackPanel>
+
+        <Border Grid.Row="1" Grid.ColumnSpan="2"
+                BorderBrush="Gray" BorderThickness="1" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Логи операций:" 
+                           FontWeight="Bold" 
+                           Margin="5"/>
+                <ListBox x:Name="listBox" 
+                         Grid.Row="1" 
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            </Grid>
+        </Border>
+
+        <Border Grid.Column="2" Grid.Row="1"
+                BorderBrush="LightBlue" BorderThickness="1" 
+                Background="#FFF0F8FF" Margin="5">
+            <StackPanel Margin="10">
+                <TextBlock Text="Статус системы:" 
+                           FontWeight="Bold" 
+                           Margin="0,0,0,10"/>
+
+                <TextBlock x:Name="txtFileSemaphore" 
+                           Text="Файловые операции: 0/3"/>
+                <TextBlock x:Name="txtDbSemaphore" 
+                           Text="Подключения к БД: 0/4" 
+                           Margin="0,5,0,0"/>
+                <TextBlock x:Name="txtConfigVersion" 
+                           Text="Версия конфигурации: 1" 
+                           Margin="0,5,0,0"/>
+                <TextBlock x:Name="txtReadLocks" 
+                           Text="Активных чтений: 0" 
+                           Margin="0,5,0,0"/>
+                <TextBlock x:Name="txtWriteLocks" 
+                           Text="Активных записей: 0" 
+                           Margin="0,5,0,0"/>
+
+                <Separator Margin="0,10,0,10"/>
+
+                <TextBlock Text="Mutex статус:" 
+                           FontWeight="Bold"/>
+                <TextBlock x:Name="txtMutexStatus" 
+                           Text="Приложение единственное"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Grid.ColumnSpan="3"
+                Background="#FFF5F5F5" Padding="5">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="txtStatus" 
+                           Text="Готов к работе" 
+                           VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
     </Grid>
 </Window>
